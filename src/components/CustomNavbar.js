@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 const CustomNavbar = () => {
 
   let admin = "Admin"
-  let userRole="user"
+  let userRole = "user"
   const navigation = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
   const [login, setLogin] = useState(false)
@@ -31,6 +31,7 @@ const CustomNavbar = () => {
 
 
   }, [login])
+ 
 
   const logout = () => {
     doLogout(() => {
@@ -55,6 +56,13 @@ const CustomNavbar = () => {
                 <NavItem>
                   <NavLink tag={ReactLink} to="/addMovie"><b>Add Movie</b></NavLink>
                 </NavItem>
+
+                <NavItem>
+                  <NavLink tag={ReactLink} to="/manageMovies"><b>Manage Movies</b></NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={ReactLink} to="/manageTickets"><b>Manage Tickets</b></NavLink>
+                </NavItem>
               </Nav>
             </>
           ) : (
@@ -63,18 +71,18 @@ const CustomNavbar = () => {
             </>
           )}
 
-          {login && user.role == userRole ?(
+          {login && user.role == userRole ? (
             <Nav className="me-auto" navbar>
-                <NavItem>
-                  <NavLink tag={ReactLink} to="/bookedTickets"><b>Booked Tickets</b></NavLink>
-                </NavItem>
+              <NavItem>
+                <NavLink tag={ReactLink} to="/bookedTickets"><b>Booked Tickets</b></NavLink>
+              </NavItem>
 
-              </Nav>
-          ):(<></>)}
+            </Nav>
+          ) : (<></>)}
 
           {login && (
             <>
-              
+
               <Nav className="ms-auto " navbar  >
                 <NavItem>
                   <NavLink active>
@@ -82,7 +90,7 @@ const CustomNavbar = () => {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink onClick={logout}><b>Logout</b></NavLink>
+                  <NavLink tag={ReactLink} onClick={logout}><b>Logout</b></NavLink>
                 </NavItem>
               </Nav>
             </>

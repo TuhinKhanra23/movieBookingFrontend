@@ -24,7 +24,7 @@ const BookedTickets = () => {
                 setAllTickets(resp);
             })
             .catch((error) => {
-                toast.warning("Session Expired !! Please Login Again")
+                toast.warning(error.response.data.errorMsg)
                 console.error("Error fetching booked tickets:", error);
             });
     };
@@ -44,6 +44,7 @@ const BookedTickets = () => {
                                         <ListGroupItem>Theater Name: {ticket.theaterName}</ListGroupItem>
                                         <ListGroupItem>Theater Location: {ticket.theaterLoc}</ListGroupItem>
                                         <ListGroupItem>Booking Date : {ticket.bookingDate}</ListGroupItem>
+                                        <ListGroupItem>Total Tickets : {ticket.seatNumber.length}</ListGroupItem>
                                         <ListGroupItem>Booked Seats: {ticket.seatNumber.join(', ')}</ListGroupItem>
 </ListGroup>
                                     </CardBody>

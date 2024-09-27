@@ -4,7 +4,7 @@ import { useEffect,useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import {  isLoggedIn,fetchCurrentUser } from '../components/loginComponents';
 import { searchMoviesByName } from "../services/movieService";
-import './SearchBar.css';
+import './css/SearchBar.css';
 
 export const SearchBar=()=>{
     const [movieSearched, setMovieSearched] = useState(true)

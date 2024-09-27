@@ -11,6 +11,8 @@ import AddMovie from './Pages/AddMovie'
 import ForgotPassword from './Pages/ForgotPassword'
 import SeatBooking from './Pages/SeatBooking';
 import BookedTickets from './Pages/BookedTickets';
+import ManageMovies from './Pages/ManageMovies';
+import ManageTickets from './Pages/ManageTickets';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
@@ -27,6 +29,9 @@ function App() {
      <Route path="/addMovie" element={<AddMovie />} />
      <Route path="/seatBooking" element={<SeatBooking />} />
      <Route path="/bookedTickets" element={<BookedTickets />} />
+     <Route path="/manageMovies" element={<ManageMovies />} />
+
+<Route path="/manageTickets" element={<ManageTickets />} />
 
 
    </Routes>

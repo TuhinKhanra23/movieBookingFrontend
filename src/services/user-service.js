@@ -20,3 +20,13 @@ export const fetchTickets=(token)=>{
     return myAxios.get(`/api/v1.0/moviebooking/showBookedTickets?token=${token}`)
     .then((response)=>response.data);
 }
+
+export const fetchAllTickets=()=>{
+    return myAxios.get('/api/v1.0/moviebooking/showAllTickets')
+    .then((response)=>response.data);
+}
+
+export const deleteTicket=(ticketId,token)=>{
+    return myAxios.post(`/api/v1.0/moviebooking/deleteTicket?ticketId=${ticketId}&token=${token}`)
+    .then((response)=>response.data);
+}

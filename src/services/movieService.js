@@ -13,6 +13,7 @@ export const addmovie=(movie,token)=>{
     .then((response)=>response.data);
 }
 
+
 export const gettAllMovies=()=>{
     return myAxios.get("/api/v1.0/moviebooking/all")
     .then((response)=>response.data);
@@ -44,3 +45,8 @@ export const fetchBookedTickets=(theaterName)=>{
     return myAxios.get(`/api/v1.0/moviebooking/fetchBookedTickets?theaterName=${theaterName}`)
     .then((response)=>response.data);
 }
+
+export const deleteMovieById = (movieId,token) => {
+    return myAxios.post(`/api/v1.0/moviebooking/delete?movieId=${movieId}&token=${token}`) // Adjust the endpoint as necessary
+        .then(response => response.data);
+};

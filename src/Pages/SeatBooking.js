@@ -1,9 +1,9 @@
 import { Card, CardBody, CardHeader, Container, Row, Col, FormGroup, Label, Input, Button, Form } from "reactstrap";
 import React, { useState, useEffect } from 'react';
 import Base from '../components/Base';
-import './SeatBooking.css';
+import './css/SeatBooking.css';
 import { gettAllMovies, getTheater, bookSeats, fetchBookedTickets } from "../services/movieService";
-import { fetchCurrentUser } from '../components/loginComponents';
+import { fetchCurrentUser,isLoggedIn } from '../components/loginComponents';
 import { toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router";
 
@@ -11,6 +11,8 @@ const rows = 5;
 const seatsPerRow = 10;
 
 const SeatBooking = () => {
+    const navigation = useNavigate();
+    
     const [user, setUser] = useState({ token: '' });
     const [seats, setSeats] = useState(Array(rows).fill().map(() => Array(seatsPerRow).fill(false)));
     const [bookMovie, setBookMovie] = useState({ movieName: '', theaterName: '', seatNumber: [] });
@@ -29,9 +31,15 @@ const SeatBooking = () => {
         setSelectSeat(false)
     })
 
+    const [login, setLogin] = useState(false)
+
     useEffect(() => {
-        setUser(fetchCurrentUser());
-    }, []);
+        setLogin(isLoggedIn());
+        setUser(fetchCurrentUser())
+      
+       
+    }, [login])
+   
 
     useEffect(() => {
         gettAllMovies().then(resp => {
@@ -78,7 +86,7 @@ const SeatBooking = () => {
             setSeats(Array(rows).fill().map(() => Array(seatsPerRow).fill(false))); 
             navigate("/bookedTickets")
         } catch (error) {
-            toast.warning("Session Expired !! Please Login Again")
+            toast.warning((error.response.data.errorMsg))
             console.error("Booking Error:", error);
         }
     };
@@ -173,7 +181,8 @@ const SeatBooking = () => {
 
             {selectSeat && (
                 <div className="theater">
-                    <h1>Seat Booking</h1> 
+                    <h1>Seat Booking</h1>
+                    <p><span style={{ color: 'dark' }}>B - Booked Seats</span><span style={{ color: 'green' }}> A - Available Seats </span><span style={{ color: 'red' }}> S - Selected Seats</span></p> 
                     <div className="seats">
                         {seats.map((row, rowIndex) => (
                             <div className="row" key={rowIndex}>
@@ -188,7 +197,7 @@ const SeatBooking = () => {
                                             className={`seat ${isBooked ? 'booked' : isSeatAlreadyBooked ? 'already-booked' : 'available'}`}
                                             onClick={() => !isSeatAlreadyBooked && handleSeatClick(rowIndex, seatIndex)}
                                         >
-                                            {isSeatAlreadyBooked ? 'B' : isBooked ? 'X' : 'O'}
+                                            {isSeatAlreadyBooked ? 'B' : isBooked ? 'S' : 'A'}
                                         </div>
                                     );
                                 })}
