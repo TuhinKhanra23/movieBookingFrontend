@@ -1,4 +1,5 @@
 // setupTests.js
+// src/setupTests.js
 import "@testing-library/jest-dom";
 
 // Mocking CSS modules

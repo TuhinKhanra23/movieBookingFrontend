@@ -12,7 +12,7 @@ import {
   Form,
   FormFeedback,
 } from "reactstrap";
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Base from "../components/Base";
 import { toast } from "react-toastify";
 import { forgetPassword } from "../services/user-service";

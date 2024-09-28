@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import BookedTickets from "./BookedTickets"; // Adjust the path as necessary
+import BookedTickets from "./BookedTickets";
 import { fetchTickets } from "../services/user-service";
 import { fetchCurrentUser } from "../components/loginComponents";
 import { toast } from "react-toastify";
@@ -15,14 +15,15 @@ describe("BookedTickets Component", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    fetchCurrentUser.mockReturnValue(mockUser);
-    jest.spyOn(toast, "warning").mockImplementation(() => {}); // Mock toast warning
+    fetchCurrentUser.mockReturnValue(mockUser); // Ensure this is correctly returning a mock user
+    jest.spyOn(toast, "warning").mockImplementation(() => {});
     jest.spyOn(console, "error").mockImplementation(() => {});
   });
 
   afterAll(() => {
-    console.error.mockRestore(); // Restore original implementation after tests
+    console.error.mockRestore();
   });
+
   test("fetches and displays booked tickets", async () => {
     const mockTickets = [
       {
@@ -53,7 +54,6 @@ describe("BookedTickets Component", () => {
       </MemoryRouter>
     );
 
-    // Wait for tickets to be displayed
     await waitFor(() => {
       expect(screen.getByText(/inception/i)).toBeInTheDocument();
       expect(screen.getByText(/cineplex/i)).toBeInTheDocument();
@@ -76,12 +76,10 @@ describe("BookedTickets Component", () => {
       </MemoryRouter>
     );
 
-    // Wait for the warning toast
     await waitFor(() => {
       expect(toast.warning).toHaveBeenCalledWith(errorMessage);
     });
 
-    // Check if the error was logged correctly
     expect(console.error).toHaveBeenCalledWith(
       "Error fetching booked tickets:",
       errorMessage
@@ -97,7 +95,6 @@ describe("BookedTickets Component", () => {
       </MemoryRouter>
     );
 
-    // Wait for the no tickets message
     await waitFor(() => {
       expect(screen.getByText(/no booked tickets found/i)).toBeInTheDocument();
     });

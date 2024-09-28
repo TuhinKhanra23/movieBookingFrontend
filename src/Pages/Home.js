@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Base from "../components/Base";
 import { gettAllMovies, searchMoviesByName } from "../services/movieService";
 import { Button, Card, CardBody, CardText, Col, Row } from "reactstrap";

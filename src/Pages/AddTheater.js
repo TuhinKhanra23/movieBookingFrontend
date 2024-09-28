@@ -12,7 +12,7 @@ import {
   Form,
   FormFeedback,
 } from "reactstrap";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Base from "../components/Base";
 import { toast } from "react-toastify";
 import { addTheater } from "../services/movieService";
