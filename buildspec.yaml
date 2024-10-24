@@ -1,17 +1,21 @@
 version: 0.2
-
+ 
 phases:
   install:
-    runtime-version:
-      nodejs: 22.9.0
-    pre_build:
-      commands:
-        - npm install
-    build:
-      commands:
-        - npm run build
+    runtime-versions:
+      nodejs: 22
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Build started on 'date'
+      - npm run build
+ 
 artifacts:
   files:
-    - "**/*"
-  base-directory: "build"
-  
+    - '**/*'
+    #- "my-app/build/**/*"
+  base-directory: 'build'
+  #discard-paths: yes
