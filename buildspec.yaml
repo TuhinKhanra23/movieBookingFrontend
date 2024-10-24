@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-version:
+      nodejs: 22.9.0
+    pre_build:
+      commands:
+        - npm install
+    build:
+      commands:
+        - npm run build
+artifacts:
+  files:
+    - "**/*"
+  base-directory: "build"
+  
