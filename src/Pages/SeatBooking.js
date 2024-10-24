@@ -30,7 +30,7 @@ const seatsPerRow = 10;
 const SeatBooking = () => {
   const navigation = useNavigate();
 
-  const [user, setUser] = useState({ token: "" });
+  const [user, setUser] = useState({ token: "",loginId:"" });
   const [seats, setSeats] = useState(
     Array(rows)
       .fill()
@@ -91,6 +91,7 @@ const SeatBooking = () => {
     });
 
     const updatedBookMovie = {
+      loginId:user.loginId,
       movieName: movieInfo.movieInfoName,
       theaterName: theaterInfo.theaterInfoName,
       seatNumber: bookedSeatsToReserve,
@@ -101,7 +102,8 @@ const SeatBooking = () => {
     setBookMovie(updatedBookMovie); // This line may not be necessary for the booking logic
 
     try {
-      const response = await bookSeats(updatedBookMovie, user.token);
+      const response = await bookSeats(updatedBookMovie, "usertoken");
+      console.log(updatedBookMovie);
       toast.success("Seats booked successfully!");
       resetAllMovies();
       setSeats(
@@ -109,7 +111,7 @@ const SeatBooking = () => {
           .fill()
           .map(() => Array(seatsPerRow).fill(false))
       );
-      navigate("/bookedTickets");
+      
     } catch (error) {
       toast.warning(error.response.data.errorMsg);
       console.error("Booking Error:", error);

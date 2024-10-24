@@ -24,9 +24,9 @@ export const forgetPassword = (user) => {
     .then((response) => response.data);
 };
 
-export const fetchTickets = (token) => {
+export const fetchTickets = (loginId) => {
   return myAxios
-    .get(`/showBookedTickets?token=${token}`)
+    .get(`/showBookedTickets?userId=${loginId}`)
     .then((response) => response.data);
 };
 

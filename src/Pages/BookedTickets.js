@@ -6,20 +6,20 @@ import { fetchCurrentUser } from "../components/loginComponents";
 import { toast } from "react-toastify";
 
 const BookedTickets = () => {
-  const [user, setUser] = useState({ token: "" });
+  const [user, setUser] = useState({ token: "",loginId:"" });
   const [allTickets, setAllTickets] = useState([]);
 
   useEffect(() => {
     const currentUser = fetchCurrentUser();
     setUser(currentUser);
 
-    if (currentUser.token) {
-      fetchUserTickets(currentUser.token);
+    if (currentUser.loginId) {
+      fetchUserTickets(currentUser.loginId);
     }
   }, []);
 
-  const fetchUserTickets = (token) => {
-    fetchTickets(token)
+  const fetchUserTickets = (loginId) => {
+    fetchTickets(loginId)
       .then((resp) => {
         setAllTickets(resp);
       })

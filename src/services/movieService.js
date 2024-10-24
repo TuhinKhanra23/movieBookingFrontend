@@ -20,7 +20,7 @@ export const gettAllMovies=()=>{
 }
 
 export const searchMoviesByName=(movieName)=>{
-    return myAxios.get(`/api/v1.0/moviebooking/movies/search?movieName=${movieName}`)
+    return myAxios.get(`/search?movieName=${movieName}`)
     .then((response)=>response.data);
 
 }
@@ -31,18 +31,18 @@ export const gettAllMoviesToBook=()=>{
 }
 
 export const getTheater=(movieName)=>{
-    return myAxios.get(`/api/v1.0/moviebooking/getTheater?movieName=${movieName}`)
+    return myAxios.get(`/getTheater?movieName=${movieName}`)
     .then((response)=>response.data);
 }
 
 export const bookSeats=(bookTicketReqDTO,token)=>{
-    console.log(bookTicketReqDTO)
-    return myAxios.post(`/api/v1.0/moviebooking/add?token=${token}`,bookTicketReqDTO)
+    console.log(bookTicketReqDTO);
+    return myAxios.post(`/add?token=${token}`,bookTicketReqDTO)
     .then((response)=>response.data);
 }
 
 export const fetchBookedTickets=(theaterName)=>{
-    return myAxios.get(`/api/v1.0/moviebooking/fetchBookedTickets?theaterName=${theaterName}`)
+    return myAxios.get(`/fetchBookedTickets?theaterName=${theaterName}`)
     .then((response)=>response.data);
 }
 
