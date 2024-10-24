@@ -3,7 +3,7 @@ import { mockLogin } from "./mocks/user-service";
 
 export const signup = (user) => {
   return myAxios
-    .post("/api/v1.0/moviebooking/register", user)
+    .post("/registerUser", user)
     .then((response) => response.data);
 };
 
@@ -11,7 +11,7 @@ export const login = (user) => {
   // return mockLogin(user);
   return myAxios
     .get(
-      `/api/v1.0/moviebooking/login?loginId=${user.loginId}&password=${user.password}`
+      `/login?loginId=${user.loginId}&password=${user.password}`
     )
     .then((response) => response.data);
 };
@@ -19,20 +19,20 @@ export const login = (user) => {
 export const forgetPassword = (user) => {
   return myAxios
     .post(
-      `/api/v1.0/moviebooking/forgot?loginId=${user.loginId}&newPassword=${user.newPassword}`
+      `/forgot?loginId=${user.loginId}&newPassword=${user.newPassword}`
     )
     .then((response) => response.data);
 };
 
 export const fetchTickets = (token) => {
   return myAxios
-    .get(`/api/v1.0/moviebooking/showBookedTickets?token=${token}`)
+    .get(`/showBookedTickets?token=${token}`)
     .then((response) => response.data);
 };
 
 export const fetchAllTickets = () => {
   return myAxios
-    .get("/api/v1.0/moviebooking/showAllTickets")
+    .get("/showAllTickets")
     .then((response) => response.data);
 };
 

@@ -15,7 +15,7 @@ export const addmovie=(movie,token)=>{
 
 
 export const gettAllMovies=()=>{
-    return myAxios.get("/api/v1.0/moviebooking/all")
+    return myAxios.get("/all")
     .then((response)=>response.data);
 }
 
