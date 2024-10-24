@@ -54,7 +54,7 @@ const Home = () => {
           <input
             id="movieName"
             name="movieName"
-            placeholder="Search your movies here..."
+            placeholder="Search movies here..."
             onChange={(e) => handleChange(e, "movieName")}
             value={movie.movieName}
           />
