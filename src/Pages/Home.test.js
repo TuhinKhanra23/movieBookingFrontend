@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Home from "./Home";
 import { gettAllMovies, searchMoviesByName } from "../services/movieService";
@@ -26,11 +26,13 @@ describe("Home Component", () => {
   test("renders without crashing", async () => {
     gettAllMovies.mockResolvedValueOnce([]);
 
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      );
+    });
 
     expect(
       screen.getByPlaceholderText(/search your movies here.../i)
@@ -45,11 +47,13 @@ describe("Home Component", () => {
 
     gettAllMovies.mockResolvedValueOnce(movies);
 
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      );
+    });
 
     await waitFor(() => {
       expect(screen.getByText(/movie 1/i)).toBeInTheDocument();
@@ -60,11 +64,13 @@ describe("Home Component", () => {
   test("handles error when fetching movies", async () => {
     gettAllMovies.mockRejectedValueOnce(new Error("Fetch failed"));
 
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      );
+    });
 
     await waitFor(() => {
       expect(
@@ -79,11 +85,13 @@ describe("Home Component", () => {
     ];
     searchMoviesByName.mockResolvedValueOnce(movies);
 
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      );
+    });
 
     fireEvent.change(
       screen.getByPlaceholderText(/search your movies here.../i),
@@ -101,11 +109,13 @@ describe("Home Component", () => {
   test("handles error when searching for a movie", async () => {
     searchMoviesByName.mockRejectedValueOnce(new Error("Search failed"));
 
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      );
+    });
 
     fireEvent.change(
       screen.getByPlaceholderText(/search your movies here.../i),
@@ -123,8 +133,7 @@ describe("Home Component", () => {
   });
 
   test("disables the booking button for upcoming movies", async () => {
-    // Mock the API response
-    gettAllMovies.mockResolvedValue([
+    gettAllMovies.mockResolvedValueOnce([
       {
         movieId: 1,
         movieName: "Upcoming Movie",
@@ -132,24 +141,21 @@ describe("Home Component", () => {
       },
     ]);
 
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    );
+    await act(async () => {
+      render(
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      );
+    });
 
-    // Wait for the movies to be displayed
     await waitFor(() => {
       expect(screen.getByText(/Upcoming Movie/i)).toBeInTheDocument();
     });
 
-    // Get the link that is styled as a button with the text "Upcoming"
     const buttons = screen.getAllByRole("link", { name: /upcoming/i });
 
-    // Expect that there is one button
     expect(buttons).toHaveLength(1);
-
-    // Check if the button has the disabled class
-    expect(buttons[0]).toHaveClass("disabled"); // Check if the class 'disabled' is present
+    expect(buttons[0]).toHaveClass("disabled");
   });
 });

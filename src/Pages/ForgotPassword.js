@@ -71,7 +71,7 @@ const ForgotPassword = () => {
     <Base>
       <Container className="m-5">
         <Row>
-          <Col sm={{ size: 6, offset: 3 }}>
+          <Col sm={{ size: 6, offset: 1 }}>
             <Card className="p-2" outline color="primary">
               <CardHeader>
                 <h3>Forgot Password!</h3>

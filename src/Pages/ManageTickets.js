@@ -53,7 +53,7 @@ const ManageTickets = () => {
                     const bookingDate = new Date(ticket.bookingDate);
        
         const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1); 
+        yesterday.setDate(yesterday.getDate()-1); 
 
         const isPastDate = bookingDate < yesterday; 
                     return (
